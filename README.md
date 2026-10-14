@@ -70,7 +70,8 @@ sw.js                            Service Worker — العمل بدون إنتر
 assets/
   css/app.css                    التنسيقات (RTL + وضع الطباعة + واجهة PWA)
   img/
-    logo-moe.svg                 شعار وزارة التعليم
+    logo-moe-white.png           شعار وزارة التعليم الرسمي (أبيض — للترويسة الداكنة)
+    logo-moe-green.png           شعار وزارة التعليم الرسمي (أخضر — للخلفيات الفاتحة)
     icon-192.png / icon-512.png        أيقونة التطبيق
     icon-maskable-*.png          أيقونة للأجهزة بدون زوايا دائرية
     apple-touch-icon.png         أيقونة الآيفون
@@ -102,6 +103,7 @@ assets/
 tools/
   check-data.py                  أداة فحص نصوص ملفات البيانات
   make-icons.py                  مولّد أيقونات التطبيق
+  make-logo.py                   استخراج شعار وزارة التعليم من ملف الدليل (مع SMask) وتلوينه
 ```
 
 ---

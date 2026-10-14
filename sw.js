@@ -1,4 +1,4 @@
-/* =============================================================================
+﻿/* =============================================================================
    Service Worker — منصة قواعد السلوك والمواظبة
    يعمل بالكامل دون اتصال بالإنترنت.
    ملاحظة: كل المسارات نسبية ليعمل التطبيق من أي مجلد على أي استضافة.
@@ -36,7 +36,7 @@ const SHELL = [
   './assets/js/data-14-behavior.js',
   './assets/vendor/pdf.min.js',
   './assets/vendor/pdf.worker.min.js',
-  './assets/img/logo-moe.svg',
+  './assets/img/logo-moe-white.png','./assets/img/logo-moe-green.png',
   './assets/img/icon-192.png',
   './assets/img/icon-512.png',
   './assets/img/icon-maskable-192.png',

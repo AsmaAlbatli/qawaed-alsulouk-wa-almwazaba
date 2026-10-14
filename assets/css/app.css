@@ -49,9 +49,23 @@ li{margin:.3em 0}
 }
 .topbar .wrap{display:flex;align-items:center;gap:14px;min-height:72px;flex-wrap:wrap;padding-block:8px}
 .brand{display:flex;align-items:center;gap:12px;flex:1 1 320px;min-width:0}
-.brand img{height:46px;width:auto;background:#fff;border-radius:8px;padding:3px 6px}
+.brand img{
+  height:48px;width:auto;flex:0 0 auto;
+  background:transparent;   /* الشعار الرسمي بخلفية شفافة — بلا بطاقة */
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));
+}
+.brand-txt{min-width:0}
 .brand h1{font-size:1.12rem;margin:0;letter-spacing:-.2px}
 .brand .sub{font-size:.76rem;opacity:.9;margin:0}
+
+/* شريط-credit على حافة الترويسة السفلية */
+.credit{
+  background:rgba(0,0,0,.22);
+  border-top:1px solid rgba(255,255,255,.14);
+  color:#D8EDE4;
+  font-size:.74rem;font-weight:600;letter-spacing:.2px;
+  text-align:center;padding:5px 12px;
+}
 
 .nav{display:flex;gap:6px;flex-wrap:wrap}
 .nav a{
