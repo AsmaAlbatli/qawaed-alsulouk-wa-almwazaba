@@ -1,0 +1,16 @@
+# نظام التشغيل
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# المحررات
+.vscode/
+.idea/
+
+# مؤقتة
+*.tmp
+*.log
+~$*
+
+# ملفات مضغوطة
+*.zip

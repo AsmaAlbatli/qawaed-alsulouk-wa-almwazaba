@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الأدوار وإجراءات الغياب — منصة قواعد السلوك والمواظبة</title>
+<meta name="description" content="صفحة تفاعلية تعرض أدوار المعلم والمدير وولي الأمر والمرشد الطلابي ولجنة التوجيه الطلابي، وإجراءات الغياب بعذر وبدون عذر، من قواعد السلوك والمواظبة ١٤٤٧هـ.">
+<meta name="theme-color" content="#0F8A5F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="قواعد السلوك">
+<meta name="application-name" content="قواعد السلوك والمواظبة">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link href="assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <img src="assets/img/logo-moe.svg" alt="شعار وزارة التعليم">
+      <div>
+        <h1>الأدوار وإجراءات الغياب</h1>
+        <p class="sub">قواعد السلوك والمواظبة — الإصدار الخامس ١٤٤٧هـ</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="roles.html" class="on">الأدوار وإجراءات الغياب</a>
+      <a id="navPdf" href="assets/files/moe-rules-1447.pdf">ملف الدليل</a>
+    </nav>
+    <div class="hdr-tools">
+      <span class="net-state" id="netState" title="حالة الاتصال بالإنترنت"></span>
+      <button class="install-btn gone" id="installBtn" title="تثبيت المنصة كتطبيق على جهازك">📲 <span>ثبّت التطبيق</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">صفحة تفصيلية</span>
+    <h2>الأدوار الوظيفية وإجراءات الغياب</h2>
+    <p class="lead">
+      تُبيّن هذه الصفحة ما ورد في الدليل من نقاط لكل دور من أدوار المعنيين —
+      <strong>المعلم</strong>، و<strong>المدير</strong>، و<strong>ولي الأمر</strong>، إضافةً إلى المرشد الطلابي ولجنة التوجيه الطلابي —
+     مع إجراءات الغياب بعذر وبدون عذر، وجداولها حسب عدد الأيام.
+    </p>
+    <div class="chips">
+      <span class="chip">المادة (3) الأدوار</span>
+      <span class="chip">المادة (4) واجبات الطالب</span>
+      <span class="chip">المادة (31–35) الغياب والمواظبة</span>
+    </div>
+  </div>
+</section>
+
+<div class="searchbar">
+  <div class="wrap">
+    <input id="q" type="search" placeholder="ابحث في هذه الصفحة… مثال: ٥ أيام، المواظبة، ولي الأمر" aria-label="بحث">
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<main id="main">
+<div class="wrap">
+
+  <!-- ══════════ حاسبة الغياب ══════════ -->
+  <section id="calc">
+    <div class="sec-head">
+      <h2>🧮 حاسبة إجراءات الغياب</h2>
+      <span class="tag">تفاعلية</span><div class="rule"></div>
+    </div>
+    <div class="card">
+      <div class="toolbar">
+        <label for="cDays">عدد أيام الغياب:</label>
+        <input id="cDays" type="number" min="0" max="30" value="3">
+        <label for="cType">نوع الغياب:</label>
+        <select id="cType">
+          <option value="excused">بعذر</option>
+          <option value="unexcused">بدون عذر</option>
+        </select>
+      </div>
+      <div id="cOut"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ الأدوار ══════════ -->
+  <section id="roles">
+    <div class="sec-head">
+      <h2>👥 الأدوار</h2>
+      <span class="tag">نقاط</span><div class="rule"></div>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn-ghost" id="expandAll"> فتح الكل </button>
+      <button class="btn btn-ghost" id="collapseAll"> إغلاق الكل </button>
+    </div>
+    <div class="grid g2" id="roleGrid"></div>
+  </section>
+
+  <!-- ══════════ إجراءات الغياب ══════════ -->
+  <section id="absence">
+    <div class="sec-head">
+      <h2>📋 إجراءات الغياب والمواظبة</h2>
+      <span class="tag">المواد 31–35</span><div class="rule"></div>
+    </div>
+
+    <!-- تقييم المواظبة -->
+    <div class="card" style="margin-bottom:16px">
+      <h3 id="tAssess"></h3>
+      <p style="font-weight:700;color:var(--moe-green-d)" id="lAssess"></p>
+      <ul class="points" id="pAssess"></ul>
+      <h4 style="margin-top:1em">قواعد حصر المواظبة</h4>
+      <ul class="points" id="rAssess"></ul>
+    </div>
+
+    <!-- حالات العذر -->
+    <div class="card" style="margin-bottom:16px">
+      <h3 id="tExc"></h3>
+      <p style="font-weight:700;color:var(--moe-green-d)" id="lExc"></p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>م</th><th>الحالة</th><th>الإثبات</th></tr></thead>
+          <tbody id="tbExc"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- الغياب بعذر -->
+    <div class="card" style="margin-bottom:16px">
+      <h3 id="tExcused"></h3>
+      <p style="font-weight:700;color:var(--moe-green-d)" id="lExcused"></p>
+      <div class="card" style="background:#FFFBF0;border-color:var(--gold);box-shadow:none;margin-bottom:12px">
+        <p id="nExcused" style="margin:0;color:#6B5320"></p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>أيام الغياب</th><th>الإجراءات المتخذة</th></tr></thead>
+          <tbody id="tbExcused"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- الغياب بدون عذر -->
+    <div class="card" style="margin-bottom:16px">
+      <h3 id="tUn"></h3>
+      <p style="font-weight:700;color:var(--moe-green-d)" id="lUn"></p>
+      <div class="card" style="background:#FFF4F2;border-color:#E7A49F;box-shadow:none;margin-bottom:12px">
+        <p id="nUn" style="margin:0;color:#8C2F29"></p>
+      </div>
+      <div class="tbl-wrap" style="margin-bottom:14px">
+        <table>
+          <thead><tr><th>عدد أيام الغياب</th><th>عدد درجات المواظبة المخصومة</th></tr></thead>
+          <tbody id="tbDeg"></tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>أيام الغياب</th><th>الإجراءات المتخذة</th></tr></thead>
+          <tbody id="tbUn"></tbody>
+        </table>
+      </div>
+      <p id="fUn" style="margin:12px 0 0;font-weight:700;color:var(--moe-green-d)"></p>
+    </div>
+
+    <!-- أيام المواظبة العامة -->
+    <div class="card">
+      <h3 id="tGen"></h3>
+      <ul class="points" id="pGen"></ul>
+    </div>
+  </section>
+
+  <!-- ══════════ النماذج ══════════ -->
+  <section id="forms">
+    <div class="sec-head">
+      <h2>🗂️ نماذج الغياب المرفقة</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h4>نموذج إجراءات الغياب بعذر</h4>
+        <p style="font-size:.88rem;color:var(--muted)">يتضمن: اسم الطالب، المرحلة، الصف، عدد أيام الإياب، الإجراءات المتخذة، تاريخ الإجراء، توقيغ الطالب، وتوقيع ولي الأمر.</p>
+        <button class="btn btn-primary" onclick="openPdf()">📕 عرض النموذج في الدليل</button>
+      </div>
+      <div class="card">
+        <h4>نموذج إجراءات الغياب بدون عذر</h4>
+        <p style="font-size:.88rem;color:var(--muted)">يتضمن: اسم الطالب، المرحلة، الصف، عدد أيام الإياب، الإجراءات المتخذة، عدد درجات المواظبة المخصومة، تاريخ الإجراء، وتوقيع الطالب وولي الأمر.</p>
+        <button class="btn btn-primary" onclick="openPdf()">📕 عرض النموذج في الدليل</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<!-- ═══ إرشاد iOS ═══ -->
+<div class="ios-guide" id="iosGuide">
+  <button class="close" onclick="this.parentNode.classList.remove('show')" aria-label="إغلاق">✕</button>
+  <h4>📲 تثبيت التطبيق على الآيفون / الآيباد</h4>
+  <ol>
+    <li>اضغط زر <b>المشاركة</b> من شريط سفاري (أسفل الشاشة).</li>
+    <li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b>.</li>
+    <li>اضغط <b>إضافة</b> — وستجد التطبيق بأيقونته على شاشتك.</li>
+  </ol>
+  <p style="margin:.6em 0 0;font-size:.83rem;color:var(--muted)">
+    بعدها يعمل التطبيق بملء الشاشة وبدون إنترنت.
+  </p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>صفحة الأدوار وإجراءات الغياب</strong><br>
+      اعتماداً على: «قواعد السلوك والمواظبة لطلبة التعليم العام» — الإصدار الخامس ١٤٤٧هـ / ٢٠٢٥م.
+    </div>
+    <div><a href="index.html">← العودة إلى الرئيسية</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/mode.js"></script>
+<script src="assets/vendor/pdf.min.js"></script>
+<script src="assets/js/data-01-doc.js"></script>
+<script src="assets/js/data-04-role-manager.js"></script>
+<script src="assets/js/data-05-role-teacher.js"></script>
+<script src="assets/js/data-06-role-parent.js"></script>
+<script src="assets/js/data-07-role-counselor.js"></script>
+<script src="assets/js/data-08-role-committee.js"></script>
+<script src="assets/js/data-09-att-assess.js"></script>
+<script src="assets/js/data-10-att-excuses.js"></script>
+<script src="assets/js/data-11-att-excused.js"></script>
+<script src="assets/js/data-12-att-unexcused.js"></script>
+<script src="assets/js/data-13-att-general.js"></script>
+<script src="assets/js/data-14-behavior.js"></script>
+<script src="assets/js/roles.js"></script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>

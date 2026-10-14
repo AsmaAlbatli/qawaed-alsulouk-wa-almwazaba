@@ -1,0 +1,60 @@
+{
+  "name": "قواعد السلوك والمواظبة لطلبة التعليم العام",
+  "short_name": "قواعد السلوك",
+  "description": "منصة تفاعلية لقواعد السلوك والمواظبة لطلبة التعليم العام — الإصدار الخامس ١٤٤٧هـ: التعريفات، الأدوار، درجات تقييم السلوك، وإجراءات الغياب، مع عرض وتحميل ملف الدليل.",
+  "lang": "ar",
+  "dir": "rtl",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "background_color": "#0F8A5F",
+  "theme_color": "#0F8A5F",
+  "categories": ["education", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/img/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/img/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الأدوار وإجراءات الغياب",
+      "short_name": "الأدوار والغياب",
+      "description": "دور المعلم والمدير وولي الأمر، وإجراءات الغياب بعذر وبدون عذر",
+      "url": "./roles.html",
+      "icons": [
+        { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" }
+      ]
+    }
+  ]
+}
