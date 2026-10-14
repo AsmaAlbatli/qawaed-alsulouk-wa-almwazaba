@@ -5,7 +5,7 @@
    ========================================================================== */
 'use strict';
 
-const VERSION = 'v1.0.3';
+const VERSION = 'v1.0.4';
 const SHELL_CACHE = 'brp-shell-' + VERSION;
 const BIG_CACHE   = 'brp-large-' + VERSION;
 
@@ -56,14 +56,24 @@ const BIG = [
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const cache = await caches.open(SHELL_CACHE);
-    // نضيف كل ملف على حدة حتى لا يفشل التثبيت كله بسبب ملف واحد
-    await Promise.all(SHELL.map(async (url) => {
+
+    // نضيف كل ملف على حدة حتى لا يفشل التثبيت كله بسبب ملف واحد،
+    // ونعيد المحاولة مرة ثانية لأن أعذار التحميل قد تكون مؤقتة.
+    const fetchOne = async (url) => {
       try {
-        await cache.add(new Request(url, { cache: 'reload' }));
-      } catch (err) {
-        console.warn('[sw] تعذّر تخزين', url, err);
+        const r = await fetch(new Request(url, { cache: 'reload' }));
+        if (r && r.ok) { await cache.put(url, r); return true; }
+        return false;
+      } catch (e) { return false; }
+    };
+
+    for (const url of SHELL) {
+      if (url === './') continue;
+      if (!(await fetchOne(url))) {
+        await fetchOne(url);          // محاولة ثانية
       }
-    }));
+    }
+    await fetchOne('./');
   })());
 });
 

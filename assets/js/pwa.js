@@ -126,7 +126,40 @@
   }
   window.pwaToast = toast;
 
-  /* ─────────────── 6) إظهار زر التثبيت عند الحاجة ─────────────── */
+  /* ─────────────── 6) حارس تحميل ملفات البيانات ───────────────
+     لو فشل تحميل أي ملف بيانات (انقطاع شبكة / خطأ مؤقت من الخادم)
+     تظهر رسالة واضحة بدل أن تُعرض المنصة ناقصة بصمت. */
+  window.addEventListener('load', function () {
+    var isRoles = !!document.querySelector('#roleGrid') &&
+                  !!document.querySelector('#tbExc');
+    var need = ['DOC',
+      'ROLE_MANAGER', 'ROLE_TEACHER', 'ROLE_PARENT',
+      'ROLE_COUNSELOR', 'ROLE_COMMITTEE'];
+    if (isRoles) {
+      need = need.concat(['ATT_ASSESS', 'ATT_EXCUSES', 'ATT_EXCUSED',
+                          'ATT_UNEXCUSED', 'ATT_GENERAL']);
+    } else {
+      need = need.concat(['GOALS', 'DEFS_A', 'DEFS_B', 'ROLE_STUDENT',
+                          'ROLE_DEPT', 'BEHAVIOR', 'FORMS']);
+    }
+
+    var missing = need.filter(function (k) { return typeof window[k] === 'undefined'; });
+    if (!missing.length) return;
+
+    var b = document.createElement('div');
+    b.className = 'loaderr-bar';
+    b.innerHTML =
+      '<b>⚠️ تعذّر تحميل جزء من المحتوى</b>' +
+      '<span>لم يُحمَّل: ' + missing.join('، ') + '</span>' +
+      '<button type="button" id="loadRetry">إعادة المحاولة</button>';
+    document.body.appendChild(b);
+    document.body.classList.add('has-loaderr');
+    document.getElementById('loadRetry').addEventListener('click', function () {
+      location.reload();
+    });
+  });
+
+  /* ─────────────── 7) إظهار زر التثبيت عند الحاجة ─────────────── */
   window.addEventListener('load', function () {
     setTimeout(function () {
       if (standalone) return;

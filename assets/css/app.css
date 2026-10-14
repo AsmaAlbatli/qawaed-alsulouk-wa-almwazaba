@@ -261,6 +261,22 @@ footer a{color:#fff;font-weight:600}
   .topbar .wrap{min-height:64px}
 }
 
+/* ══════════════ خطأ تحميل المحتوى ═════════════════════════════════ */
+.loaderr-bar{
+  position:fixed;inset-inline:0;top:0;z-index:210;
+  background:#7F1D1D;color:#FEE2E2;padding:14px 22px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:.9rem;border-bottom:3px solid #FCA5A5;
+}
+.loaderr-bar b{font-size:.98rem}
+.loaderr-bar span{opacity:.9;font-size:.85rem;direction:ltr}
+.loaderr-bar button{
+  font:inherit;font-size:.85rem;font-weight:800;cursor:pointer;
+  background:#FEE2E2;color:#7F1D1D;border:0;border-radius:9px;padding:8px 16px;
+}
+.loaderr-bar button:hover{background:#fff}
+body.has-loaderr{padding-top:64px}
+
 /* ══════════════ وضع الفتح المباشر file:// ═══════════════════════════ */
 .filemode-bar{
   position:fixed;inset-inline:0;top:0;z-index:200;
