@@ -882,7 +882,13 @@
 
     var ok = await waitForLib(9000);
     if (!ok) {
-      msg($('#noteMsg'), 'تعذّر تحميل مكتبة Supabase من الإنترنت. تحققي من الاتصال ثم أعيدي تحميل الصفحة.', 'err');
+      var t = $('#notesGateTitle'), x = $('#notesGateText'), b = $('#notesGateBtn');
+      if (t) t.textContent = 'تعذّر تحميل خدمة الملاحظات';
+      if (x) {
+        x.textContent = 'تحتاج الملاحظات السحابية اتصالًا بالإنترنت لتحميل مكتبة Supabase. ' +
+                        'يمكنك متابعة استخدام المنصة كاملة، ثم إعادة المحاولة بعد عودة الاتصال.';
+      }
+      if (b) b.hidden = true;
       return;
     }
 

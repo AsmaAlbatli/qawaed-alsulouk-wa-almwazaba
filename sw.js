@@ -10,7 +10,7 @@
 'use strict';
 
 // ★ غيّر هذا الرقم مع كل تعديل على ملفات الـSHALL
-const VERSION = 'v1.0.6';
+const VERSION = 'v1.0.7';
 const SHELL_CACHE = 'brp-shell-' + VERSION;
 const BIG_CACHE   = 'brp-large-' + VERSION;
 
