@@ -10,7 +10,7 @@
 'use strict';
 
 // ★ غيّر هذا الرقم مع كل تعديل على ملفات الـSHALL
-const VERSION = 'v1.0.5';
+const VERSION = 'v1.0.6';
 const SHELL_CACHE = 'brp-shell-' + VERSION;
 const BIG_CACHE   = 'brp-large-' + VERSION;
 
@@ -25,6 +25,8 @@ const SHELL = [
   './assets/js/pwa.js',
   './assets/js/app.js',
   './assets/js/roles.js',
+  './assets/js/supabase-config.js',
+  './assets/js/cloud.js',
   './assets/js/data-01-doc.js',
   './assets/js/data-02-defs-a.js',
   './assets/js/data-03-defs-b.js',
@@ -117,6 +119,24 @@ self.addEventListener('fetch', (e) => {
 
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;   // لا نتدخل في موارد خارجية
+
+  /* 0) إعدادات Supabase: الشبكة أولًا دائمًا حتى لا تبقى نسخة قديمة،
+        ومع الانقطاع نرجع للنسخة المخزّنة. */
+  if (/\/supabase-config\.js$/i.test(url.pathname)) {
+    e.respondWith((async () => {
+      try {
+        const fresh = await fetch(req, { cache: 'no-store' });
+        if (fresh && fresh.ok) {
+          const cache = await caches.open(SHELL_CACHE);
+          cache.put(req, fresh.clone());
+        }
+        return fresh;
+      } catch (err) {
+        return (await inShell(req)) || new Response('', { status: 504 });
+      }
+    })());
+    return;
+  }
 
   /* 1) التنقل بين الصفحات: الشبكة أولًا (للتحديث) ثم الذاكرة */
   if (req.mode === 'navigate') {

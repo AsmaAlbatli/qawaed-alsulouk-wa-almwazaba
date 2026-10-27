@@ -21,6 +21,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
 <link href="assets/css/app.css" rel="stylesheet">
 </head>
 <body>
@@ -41,9 +43,11 @@
       <a href="index.html" class="on">الرئيسية</a>
       <a href="roles.html">الأدوار وإجراءات الغياب</a>
       <a href="#doc">ملف الدليل</a>
+      <a href="#notes" id="navNotes">ملاحظاتي</a>
     </nav>
     <div class="hdr-tools">
       <span class="net-state" id="netState" title="حالة الاتصال بالإنترنت"></span>
+      <button class="auth-btn" id="authBtn" type="button" title="تسجيل الدخول / إنشاء حساب">👤 <span class="who">دخول</span></button>
       <button class="install-btn gone" id="installBtn" title="تثبيت المنصة كتطبيق على جهازك">📲 <span>ثبّت التطبيق</span></button>
     </div>
   </div>
@@ -180,6 +184,59 @@
 </div>
 </main>
 
+<!-- ═══ الملاحظات السحابية ═══ -->
+<section id="notes" class="notes-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>🗒️ ملاحظاتي</h2>
+      <span class="tag">سحابي — محمي</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="card notes-card">
+      <!-- حالة عدم التفعيل / عدم تسجيل الدخول -->
+      <div class="notes-gate" id="notesGate">
+        <div class="ng-ico">🔐</div>
+        <h3 id="notesGateTitle">سجّلي الدخول لحفظ ملاحظاتك</h3>
+        <p id="notesGateText">
+          ملاحظاتك تُحفظ في حسابك الخاص على قاعدة بيانات Supabase، وتظهر لك على أي جهاز.
+          لا يراها أي مستخدم آخر.
+        </p>
+        <button class="btn btn-primary" type="button" id="notesGateBtn">👤 تسجيل الدخول / إنشاء حساب</button>
+        <p class="ng-hint" id="notesGateHint">
+          المنصة تعمل كاملة دون حساب — الحساب مطلوب فقط لحفظ الملاحظات ومزامنتها.
+        </p>
+      </div>
+
+      <!-- واجهة الملاحظات بعد تسجيل الدخول -->
+      <div class="notes-app" id="notesApp" hidden>
+        <div class="notes-toolbar">
+          <input id="noteSearch" type="search" placeholder="ابحث في ملاحظاتك…" aria-label="بحث في الملاحظات">
+          <button class="btn btn-primary" type="button" id="noteNew">＋ ملاحظة جديدة</button>
+          <button class="btn btn-ghost" type="button" id="noteRefresh" title="تحديث الملاحظات" aria-label="تحديث الملاحظات">🔄</button>
+          <span class="notes-count" id="notesCount" title="عدد الملاحظات">0</span>
+        </div>
+
+        <form class="note-form" id="noteForm" autocomplete="off" hidden>
+          <input type="hidden" id="noteId">
+          <label for="noteTitle">العنوان <span>(اختياري)</span></label>
+          <input id="noteTitle" type="text" maxlength="120" placeholder="مثال: ملاحظة على المادة (٣١)">
+          <label for="noteBody">نص الملاحظة <span class="req">*</span></label>
+          <textarea id="noteBody" maxlength="5000" rows="4" required placeholder="اكتبي ملاحظتك هنا…"></textarea>
+          <div class="note-form-foot">
+            <span class="charc" id="noteChars">0 / 5000</span>
+            <button class="btn btn-primary" type="submit" id="noteSave">حفظ الملاحظة</button>
+            <button class="btn btn-ghost" type="button" id="noteCancel" hidden>إلغاء</button>
+          </div>
+        </form>
+
+        <div class="auth-msg" id="noteMsg" role="status" aria-live="polite"></div>
+        <div class="notes-list" id="noteList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ نافذة عرض PDF ═══ -->
 <div class="modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="عارض ملف الدليل">
   <div class="modal-box">
@@ -243,5 +300,11 @@
 <script src="assets/js/data-14-behavior.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/pwa.js"></script>
+
+<!-- ═══ Supabase: الحساب والملاحظات السحابية ═══ -->
+<script src="assets/js/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer
+        onerror="this.onerror=null;this.src='https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js'"></script>
+<script src="assets/js/cloud.js" defer></script>
 </body>
 </html>

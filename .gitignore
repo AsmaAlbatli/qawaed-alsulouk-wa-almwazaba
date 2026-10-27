@@ -14,3 +14,23 @@ desktop.ini
 
 # ملفات مضغوطة
 *.zip
+
+# ═══════════════════════════════════════════════════════════════════
+# أسرار ومفاتيح — لا تُرفع أبدًا
+# ═══════════════════════════════════════════════════════════════════
+.env
+.env.*
+*.local.js
+*service_role*
+*secret*
+*.pem
+*.key
+
+# إعدادات Supabase المحلية (تجاوز اختياري لا يُنشر)
+assets/js/supabase-config.local.js
+supabase/.temp/
+supabase/.branches/
+
+# ملاحظة: assets/js/supabase-config.js ليس سرًّا — يحتوي Project URL
+# و anon / publishable key فقط، وهما مفتاحان عامان مخصصان للمتصفح.
+# الحماية الحقيقية تأتي من سياسات RLS في supabase/schema.sql.
